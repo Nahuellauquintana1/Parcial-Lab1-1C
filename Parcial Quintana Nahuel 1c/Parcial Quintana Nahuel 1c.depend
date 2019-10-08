@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1570541839 source:d:\parcial 1c\parcial quintana nahuel 1c\elenco.c
+
+1570543074 source:d:\parcial 1c\parcial quintana nahuel 1c\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Peliculas.h"
+	"validar.h"
+	"Actores.h"
+	"Elenco.h"
+
+1570542138 d:\parcial 1c\parcial quintana nahuel 1c\peliculas.h
+	<stdio.h>
+	<stdlib.h>
+
+1570542058 d:\parcial 1c\parcial quintana nahuel 1c\validar.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+
+1570542639 d:\parcial 1c\parcial quintana nahuel 1c\actores.h
+	<stdio.h>
+	<stdlib.h>
+	"Peliculas.h"
+	"Elenco.h"
+
+1570542138 d:\parcial 1c\parcial quintana nahuel 1c\elenco.h
+	<stdio.h>
+	<stdlib.h>
+	"Peliculas.h"
+
+1570542138 source:d:\parcial 1c\parcial quintana nahuel 1c\peliculas.c
+	<stdio.h>
+	<stdlib.h>
+	"Peliculas.h"
+
+1570541937 source:d:\parcial 1c\parcial quintana nahuel 1c\validar.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validar.h"
+
+1570542648 source:d:\parcial 1c\parcial quintana nahuel 1c\actores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Peliculas.h"
+	"validar.h"
+	"Actores.h"
+
