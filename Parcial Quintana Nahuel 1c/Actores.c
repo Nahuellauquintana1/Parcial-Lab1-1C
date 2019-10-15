@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Peliculas.h"
 #include "validar.h"
 #include "Actores.h"
+#include "Peliculas.h"
+#include "Elenco.h"
 #define VACIO 0
 #define OCUPADO 1
 
@@ -55,55 +56,53 @@ int menuDeActores(char mensaje[], eActor list[], int tam)
 {
     int opcion;
     int codigoAux;
-    int flagCarga = 0;
-    do{
-    getValidInt(mensaje,"Ingrese una opcion valida",0,4,&opcion);
-    system("cls");
-    switch(opcion)
+    eActor listAux[tam];
+    do
     {
-    case 1:
-        if(addActor(list, tam) != -1)
+        getValidInt(mensaje,"Ingrese una opcion valida",0,6,&opcion);
+        system("cls");
+        switch(opcion)
         {
-            printf("\nActor Cargado\n");
-            flagCarga = 1;
+        case 1:
+            if(addActor(list, tam) != -1)
+            {
+                printf("\nActor Cargado\n");
+            }
+            else
+            {
+                printf("\nError en la Carga del Actor\n");
+            }
+            break;
+        case 2:
+            printActores(list,tam);
+            getValidInt("Ingrese el codigo del Actor a Modificar","Ingrese un numero",0,10,&codigoAux);
+            findActorbyCodigo(list,tam,codigoAux);
+            break;
+        case 3:
+            printActores(list, tam);
+            codigoAux = 0;
+            getValidInt("\nIngrese el codigo del actor a dar de baja: ","Ingrese un numero",0,10,&codigoAux);
+            if(removeActor(list,tam,codigoAux) != 0)
+            {
+                printf("\nActor dado de baja\n");
+            }
+            else
+            {
+                printf("\nNo existe Actor con ese codigo\n");
+            }
+            break;
+        case 4:
+            memcpy(listAux,list,sizeof(listAux));
+            sortActoresPorApellido(listAux, tam);
+            printActores(listAux, tam);
+            break;
+        case 5:
+            opcion = 5;
+            break;
         }
-        else
-        {
-            printf("\nError en la Carga del Actor\n");
-        }
-        break;
-    case 2:
-
-        printActores(list,tam);
-        getValidInt("Ingrese el codigo del Actor a Modificar","Ingrese un numero",0,10,&codigoAux);
-        findActorbyCodigo(list,tam,codigoAux);
-        break;
-    case 3:
-
-        printActores(list, tam);
-        codigoAux = 0;
-        getValidInt("\nIngrese el codigo del actor a dar de baja: ","Ingrese un numero",0,10,&codigoAux);
-        if(removeActor(list,tam,codigoAux) != 0)
-        {
-            printf("\nActor dado de baja\n");
-        }
-        else
-        {
-            printf("\nNo existe Actor con ese codigo\n");
-        }
-
-
-    break;
-case 4:
-    sortActoresPorApellido(list, tam);
-    printActores(list, tam);
-    break;
-case 5:
-    opcion = 5;
-    break;
+        return 0;
     }
-return 0;
-}while(opcion != 5);
+    while(opcion != 5);
 }
 
 
@@ -145,6 +144,7 @@ int removeActor(eActor list[], int len, int codigo)
         if(list[i].codigo == codigo)
         {
             list[i].estado = VACIO;
+
             retorno = 1;
         }
     }
@@ -235,31 +235,47 @@ void sortActoresPorApellido(eActor list[], int len)
     int j;
     eActor auxActor;
 
-        for(i=0; i<len-1; i++)
+    for(i=0; i<len-1; i++)
+    {
+        for(j=i+1; j<len; j++)
         {
-            for(j=i+1; j<len; j++)
+            if(list[i].estado == OCUPADO)
             {
-                if(list[i].estado == OCUPADO)
+                if(strcmp(list[i].apellido,list[j].apellido)>0)
                 {
-                    if(strcmp(list[i].apellido,list[j].apellido)>0)
+                    auxActor = list[i];
+                    list[i] = list[j];
+                    list[j] = auxActor;
+                }
+                else
+                {
+                    if(strcmp(list[i].apellido,list[j].apellido)==0)
                     {
-                        auxActor = list[i];
-                        list[i] = list[j];
-                        list[j] = auxActor;
-                    }
-                    else
-                    {
-                        if(strcmp(list[i].apellido,list[j].apellido)==0)
+                        if(list[i].nombre>list[j].nombre)
                         {
-                            if(list[i].nombre>list[j].nombre)
-                            {
-                                auxActor = list[i];
-                                list[i] = list[j];
-                                list[j] = auxActor;
-                            }
+                            auxActor = list[i];
+                            list[i] = list[j];
+                            list[j] = auxActor;
                         }
                     }
                 }
             }
         }
+    }
 }
+int removeElenco(eElenco list[], int len, int codigo)
+{
+    int i;
+    int retorno = 0; /// Si existe actor 1 ---- Si no Existe actor 0
+    for(i = 0; i  < len ; i++)
+    {
+        if(list[i].codigoActor == codigo)
+        {
+            list[i].estado = VACIO;
+
+            retorno = 1;
+        }
+    }
+    return retorno;
+}
+

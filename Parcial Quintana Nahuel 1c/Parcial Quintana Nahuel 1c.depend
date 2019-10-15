@@ -51,3 +51,59 @@
 	"validar.h"
 	"Actores.h"
 
+1570543556 source:c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\validar.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validar.h"
+
+1570543556 c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\validar.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+
+1571084842 source:c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\actores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validar.h"
+	"Actores.h"
+
+1571099592 c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\actores.h
+	<stdio.h>
+	<stdlib.h>
+
+1571098370 source:c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\elenco.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Peliculas.h"
+	"validar.h"
+	"Actores.h"
+	"Elenco.h"
+
+1571096042 c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\peliculas.h
+	<stdio.h>
+	<stdlib.h>
+
+1571099592 source:c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Peliculas.h"
+	"validar.h"
+	"Actores.h"
+	"Elenco.h"
+
+1571099592 c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\elenco.h
+	<stdio.h>
+	<stdlib.h>
+
+1571083392 source:c:\users\nahue\desktop\!c\parcial-lab1-1c-master\parcial quintana nahuel 1c\peliculas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Peliculas.h"
+

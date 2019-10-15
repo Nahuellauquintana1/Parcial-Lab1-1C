@@ -26,18 +26,25 @@ NOTAS:  I. Se deberá desarrollar bibliotecas por cada entidad, las cuales conte
 #include <string.h>
 #include "Peliculas.h"
 #include "validar.h"
-#include "Actores.h"
-#include "Elenco.h"
-#define T 5
 
+#include "Actores.h"
+
+#include "Elenco.h"
+#define TA 10
+#define TP 3
+#define TG 3
+#define TE 15
 
 int main()
 {
-    eActor unActor;
-    eActor listadeActores[T];
-    //ePeliculas listadePeliculas[T];
-    initActores(listadeActores,T);
-    int indice, opcion, notaAux, numeroAux,legajoAuxInt;
+    eActor listadeActores[TA];
+    ePeliculas listadePeliculas[TP];
+    eGenero listaDeGeneros[TP];
+    eElenco listaElencos[TE];
+    initActores(listadeActores,TA);
+    initElenco(listaElencos, TE);
+    hardCodearDatos(listadePeliculas, TP, listaDeGeneros, TG);
+    int opcion;
     do
     {
         getValidInt("1. Menu Actores\n2. Menu Elencos\n","Error Por favor Ingrese numeros Validos",0,3,&opcion);
@@ -45,10 +52,10 @@ int main()
         switch(opcion)
         {
         case 1:
-            menuDeActores("1. Cargar Actor\n2. Modificar Actor\n3. Dar de baja un Actor\n4. Listar Actores\n5. volver al menu anterior\n",listadeActores, T);
+            menuDeActores("1. Cargar Actor\n2. Modificar Actor\n3. Dar de baja un Actor\n4. Listar Actores\n5. volver al menu anterior\n",listadeActores, TA);
             break;
         case 2:
-            /// menuElenco
+            menuDeElencos("1. Cargar Nuevo Elenco\n2. Mostrar Elencos\n3. Salir\n",listadeActores,TA,listadePeliculas,TP,listaDeGeneros,TG,listaElencos,TE);
             break;
         case 3:
             opcion = 3;
