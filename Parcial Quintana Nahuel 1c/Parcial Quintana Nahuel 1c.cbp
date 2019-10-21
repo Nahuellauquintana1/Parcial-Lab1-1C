@@ -39,6 +39,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Elenco.h" />
+		<Unit filename="Fecha.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Fecha.h" />
+		<Unit filename="Pais.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pais.h" />
 		<Unit filename="Peliculas.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -9,7 +9,7 @@
 #define OCUPADO 1
 
 
-void addElenco(eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int TP, eGenero listaDeGeneros[], int TG, eElenco listaElencos[],int TE)
+void addElenco(eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int TP, eGenero listaDeGeneros[], int TG, eElenco listaElencos[],int TE, ePais listaPaises[], int tamPaises)
 {
     int codigoActorAux,codigoPeliculaAux,auxValor;
     int i;
@@ -18,9 +18,9 @@ void addElenco(eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int
     {
         system("cls");
         mostrarPeliculasConGenero(listaPeliculas, TP,listaDeGeneros, TG);
-        getValidInt("Ingrese el codigo de la pelicula: ","Ingrese un codigo valido",0,TP,&codigoPeliculaAux);
+        getValidInt("Ingrese el codigo de la pelicula: ","Ingrese un codigo valido",0,1000,&codigoPeliculaAux);
         system("cls");
-        printActores(listaDeActores, TA);
+        printActores(listaDeActores, TA,listaPaises,tamPaises);
         getValidInt("\nIngrese el codigo del Actor para este Reparto: ","Ingrese un codigo valido",0,TA,&codigoActorAux);
         getValidInt("\nIngrese el valor del contrato del Actor: ","Ingrese un numero Valido",0,15000000,&auxValor);
         if (verificarPares(codigoActorAux,codigoPeliculaAux,listaElencos, TE) == 0)
@@ -41,7 +41,7 @@ void addElenco(eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int
     }
 }
 
-void menuDeElencos(char mensaje[],eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int TP, eGenero listaDeGeneros[], int TG, eElenco listaElencos[],int TE)
+void menuDeElencos(char mensaje[],eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int TP, eGenero listaDeGeneros[], int TG, eElenco listaElencos[],int TE, ePais listaPaises[], int tamPaises)
 {
     int opcion;
     do
@@ -50,7 +50,7 @@ void menuDeElencos(char mensaje[],eActor listaDeActores[], int TA, ePeliculas li
         switch(opcion)
         {
         case 1:
-            addElenco(listaDeActores,TA, listaPeliculas, TP, listaDeGeneros,  TG,  listaElencos, TE);
+            addElenco(listaDeActores,TA, listaPeliculas, TP, listaDeGeneros,  TG,  listaElencos, TE,listaPaises, tamPaises);
             break;
         case 2:
             sortElencos(listaElencos, TE,listaPeliculas,TP,listaDeActores,TA);
@@ -167,7 +167,7 @@ void mostrarElenco(eElenco listaDeElenco[],int TE, ePeliculas listaDePeliculas[]
     int i;
     for(i = 0; i < TE; i++)
     {
-        if(listaDeElenco[i].estado == OCUPADO)
+        if(listaDeElenco[i].estado == OCUPADO && listaDeActores[listaDeElenco[i].codigoActor -1].estado == OCUPADO)
         {
             printf("PELICULA: %s\n",listaDePeliculas[listaDeElenco[i].codigoPelicula-1].descripcion);
             printf("Apellido: %s\t",listaDeActores[listaDeElenco[i].codigoActor -1].apellido);
@@ -178,3 +178,98 @@ void mostrarElenco(eElenco listaDeElenco[],int TE, ePeliculas listaDePeliculas[]
     }
 }
 
+void hardCodearElenco(eActor listaDeActores[], int TA, ePeliculas listaPeliculas[], int TP, eGenero listaDeGeneros[], int TG, eElenco listaElencos[],int TE, ePais listaPaises[], int tamPaises)
+{
+    int codigoAux[] = {1,2,3};
+    int codigoAuxPelicula[] = {1,2,3};
+    float valorContrato[] = {10000,12452,12455};
+    int i;
+    for(i = 0; i < 3; i++)
+    {
+        listaElencos[i].codigoActor = codigoAux[i];
+        listaElencos[i].codigoPelicula = codigoAuxPelicula[i];
+        listaElencos[i].valorContrato = valorContrato[i];
+        listaElencos[i].estado = OCUPADO;
+    }
+
+}
+
+void menuDeInformes(char mensaje[],ePeliculas listadePeliculas[],int TP, eGenero listaDeGeneros[], int TG, eElenco listaDeElencos[], int TE, eActor listaDeActores[],int TA, ePais listaDePaises[],int TPAIS)
+{
+    int opcion, opcionAux;
+    do
+    {
+        getValidInt(mensaje,"Ingrese una opcion valida",0,6,&opcion);
+        switch(opcion)
+        {
+        case 1:
+            peliculasTerror(listadePeliculas, TP,listaDeGeneros,TG);
+            break;
+        case 2:
+            //peliculasArgentino(listaDeElencos, TE, listaDeActores, TA, listaDePaises, TPAIS, listadePeliculas, TP);
+            break;
+        case 3:
+
+            printActores(listaDeActores, TA, listaDePaises, TP);
+            getValidInt("Ingrese el Actor a buscar","Ingrese un id valida",0,TA,&opcionAux);
+            buscarPeliculaPorActor(listaDeElencos, TE,listaDeActores,TA,listadePeliculas,TP,opcionAux, listaDeGeneros, TG);
+            break;
+        case 4:
+            opcion = 4;
+            break;
+        }
+
+    }
+    while(opcion != 4);
+}
+int mostrarPeliculasTerror(ePeliculas listaDePeliculas[], int TP, eGenero listaDeGeneros[], int TG)
+{
+    int i;
+    int idAux = -1;
+    printf("Pelicula\t\Duracion\t\tGenero\t\tFecha\t\tCodigo\n");
+    for(i = 0; i < TP; i++)
+    {
+        if((strcmp(listaDeGeneros[i].descripcion,"Terror")== 0) )
+        {
+            idAux = listaDeGeneros[i].id;
+        }
+    }
+
+    return idAux;
+}
+
+void peliculasTerror(ePeliculas listaDePeliculas[], int TP, eGenero listaDeGeneros[], int TG)
+{
+    int i;
+    int codigo;
+    codigo = mostrarPeliculasTerror(listaDePeliculas, TP, listaDeGeneros,TG);
+
+    for(i = 0; i < TP ; i++)
+    {
+        if(listaDePeliculas[i].idGenero == codigo && listaDePeliculas[i].unaFecha.anio > 2002)
+        {
+            printf("%-10s\t", listaDePeliculas[i].descripcion);
+            printf("%-10.2f\t", listaDePeliculas[i].duracion);
+            printf("%d/", listaDePeliculas[i].unaFecha.dia);
+            printf("%d/", listaDePeliculas[i].unaFecha.mes);
+            printf("%d\t", listaDePeliculas[i].unaFecha.anio);
+            printf("%-10d\n", listaDePeliculas[i].codigo);
+        }
+    }
+
+
+
+}
+
+void buscarPeliculaPorActor(eElenco listaDeElencos[],int TE, eActor listaDeActores[],int TA,ePeliculas listaDePeliculas[], int TP,int codigo, eGenero listaDeGeneros[],int TG)
+{
+    int i;
+    for(i = 0; i < TE; i++)
+    {
+        if(listaDeElencos[i].codigoActor == codigo)
+        {
+            printf("\nPELICULA: %s\n",listaDePeliculas[listaDeElencos[i].codigoPelicula-1].descripcion);
+
+        }
+    }
+}
